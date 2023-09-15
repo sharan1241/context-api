@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import Sidebar from './components/Sidebar';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Mainbar from './components/Mainbar';
+import { useState, React } from "react";
+import { MyContext } from "./MyContext";
+import Note from './components/Note';
+
 
 function App() {
+  const [value, setValue] = useState("");
+  const [value2, setValue2] = useState("");
+  const [value3,setValue3]= useState("")
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Row>
+        <Col sm={3}><Sidebar/></Col>
+        <Col sm={9} id='back'>
+          <MyContext.Provider value={{ value: [value, setValue], value2: [value2, setValue2],value3:[value3,setValue3] }} >
+          <Mainbar/>
+          <Note/>
+          </MyContext.Provider>
+        </Col>
+      </Row>
     </div>
   );
 }
